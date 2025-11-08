@@ -3,6 +3,9 @@
 # ==========================
 FROM golang:1.25-alpine
 
+# git
+RUN apk update && apk add --no-cache git bash curl
+
 WORKDIR /app
 
 # air（ホットリロードツール）をインストール

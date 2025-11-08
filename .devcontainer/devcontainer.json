@@ -2,9 +2,9 @@
   "name": "offline-dev",
   "dockerComposeFile": ["../docker-compose.yml"],
   "service": "backend",
-  "workspaceFolder": "/workspace",
+  "workspaceFolder": "/app",
   "mounts": [
-    "source=${localWorkspaceFolder},target=/workspace,type=bind",
+    "source=${localWorkspaceFolder},target=/app,type=bind",
     "source=${env:HOME}/.ssh,target=/root/.ssh,type=bind"
   ],
   "forwardPorts": [8080, 3000],
