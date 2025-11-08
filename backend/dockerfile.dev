@@ -1,0 +1,19 @@
+# ==========================
+# 開発用 Dockerfile
+# ==========================
+FROM golang:1.25-alpine
+
+WORKDIR /app
+
+# air（ホットリロードツール）をインストール
+RUN go install github.com/air-verse/air@latest
+
+# Go Modulesを先にコピーして依存関係を解決
+COPY go.mod ./
+RUN go mod download
+
+# 残りのソースコードをコピー
+COPY . .
+
+# Airでホットリロード起動
+CMD ["air"]

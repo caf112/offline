@@ -1,0 +1,31 @@
+{
+  "name": "offline-dev",
+  "dockerComposeFile": ["../docker-compose.yml"],
+  "service": "backend",
+  "workspaceFolder": "/workspace",
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace,type=bind",
+    "source=${env:HOME}/.ssh,target=/root/.ssh,type=bind"
+  ],
+  "forwardPorts": [8080, 3000],
+  "remoteUser": "root",
+
+  "initializeCommand": "export DOCKERFILE=Dockerfile.dev",
+  "postCreateCommand": "cd backend && go mod tidy",
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "go.useLanguageServer": true,
+        "go.toolsManagement.autoUpdate": true
+      },
+      "extensions": [
+        "golang.go",
+        "ms-azuretools.vscode-docker",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint"
+      ]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+# ==========================
+# Build stage
+# ==========================
+FROM golang:1.25-alpine AS builder
+
+WORKDIR /app
+
+COPY go.mod ./
+RUN go mod download
+
+COPY . .
+
+RUN go build -o offline-be .
+
+# ==========================
+# Run stage
+# ==========================
+FROM alpine:latest
+
+WORKDIR /app
+
+COPY --from=builder /app/offline-be .
+
+EXPOSE 8080
+
+CMD ["./offline-be"]
