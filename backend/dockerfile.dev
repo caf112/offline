@@ -4,7 +4,7 @@
 FROM golang:1.25-alpine
 
 # git
-RUN apk update && apk add --no-cache git bash curl
+RUN apk update && apk add --no-cache git bash curl openssh
 
 WORKDIR /app
 
