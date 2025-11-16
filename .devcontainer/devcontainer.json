@@ -1,17 +1,17 @@
 {
   "name": "offline-dev",
   "dockerComposeFile": ["../docker-compose.yml"],
-  "service": "backend",
-  "workspaceFolder": "/app",
+  "service": "dev",
+  "workspaceFolder": "/workspace",
   "mounts": [
     "source=${localWorkspaceFolder},target=/app,type=bind",
     "source=${env:HOME}/.ssh,target=/root/.ssh,type=bind"
   ],
-  "forwardPorts": [8080, 3000],
+  // "forwardPorts": [8080, 5173],
   "remoteUser": "root",
 
-  "initializeCommand": "export DOCKERFILE=Dockerfile.dev",
-  "postCreateCommand": "cd backend && go mod tidy",
+  // "initializeCommand": "export DOCKERFILE=Dockerfile.dev",
+  // "postCreateCommand": "cd backend && go mod tidy",
 
   "customizations": {
     "vscode": {

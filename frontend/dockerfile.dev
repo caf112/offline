@@ -1,0 +1,17 @@
+# ==========================
+# 開発用 Dockerfile（Frontend）
+# ==========================
+FROM node:22-slim
+
+WORKDIR /app
+
+# 依存関係だけ先にコピー（キャッシュ効率向上）
+COPY package.json package-lock.json ./
+
+RUN npm install
+
+# プロジェクト全体をコピー
+# COPY . .
+
+# Vite の開発サーバーを起動
+CMD ["npm", "run", "dev"]

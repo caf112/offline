@@ -1,24 +1,40 @@
 version: '3.9'
 
 services:
+  dev:
+    build:
+      context: .
+      dockerfile: .devcontainer/dockerfile
+    volumes:
+      - .:/workspace
+    command: sleep infinity
+    # ports:
+    #   - "8080:8080"
+    #   - "3000:3000"
+    depends_on:
+      - backend
+      - frontend
+      # - db
+
   backend:
     build:
       context: ./backend
-      dockerfile: ${DOCKERFILE:-Dockerfile.dev}
+      dockerfile: dockerfile.dev
     container_name: offline-backend
-    working_dir: /app
     volumes:
       - ./backend:/app
     ports:
       - "8080:8080"
     command: ["air"]
-    depends_on:
-      - frontend
 
   frontend:
-    build: ./frontend
+    build: 
+      context: ./frontend
+      dockerfile: dockerfile.dev
     container_name: offline-frontend
-    volumes:
+    volumes: 
       - ./frontend:/app
+      - /app/node_modules
     ports:
-      - "3000:80"
+      - "5173:5173"
+    command: npm run dev

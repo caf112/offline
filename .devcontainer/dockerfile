@@ -1,0 +1,12 @@
+# VSCode 開発用の最低限のベースイメージ
+FROM mcr.microsoft.com/devcontainers/base:debian
+
+# よく使うツールを入れておく（必要最低限）
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    bash \
+    openssh-client \
+    && apt-get clean -y
+
+WORKDIR /workspace
