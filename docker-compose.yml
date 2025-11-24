@@ -24,7 +24,9 @@ services:
     volumes:
       - ./backend:/app
     ports:
-      - "8080:8080"
+      - "8080"
+      - "8081"
+      - "8082"
     command: ["air"]
 
   frontend:
@@ -36,5 +38,5 @@ services:
       - ./frontend:/app
       - /app/node_modules
     ports:
-      - "5173:5173"
+      - "5173"
     command: npm run dev
